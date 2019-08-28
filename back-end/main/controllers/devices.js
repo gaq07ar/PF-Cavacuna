@@ -37,11 +37,13 @@ exports.getById = (req, res, next) => {
 
 exports.create = (req, res, next) => {
     console.log('On create device');
-    const deviceName = req.query.name;
-    const deviceDescription = req.query.description;
+    const slotsAmount = req.query.slots;
+    const monitoredMode = req.query.isMonitored;
+    const description = req.query.description;
     Device.create({
-        name: deviceName,
-        description: deviceDescription
+        slots_amount: slotsAmount,
+        monitored_mode: monitoredMode,
+        description: description
     }).then(result => {
         console.log(result);
     }).catch(err => {
