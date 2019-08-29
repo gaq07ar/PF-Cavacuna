@@ -10,7 +10,7 @@ router.get('/get/:deviceId', devicesController.getById);
 //localhost:3000/api/devices/create?name=heladera&description=descripcion
 router.post('/create', devicesController.create);
 
-router.put('/update/:deviceId', devicesController.update);
+router.put('/update', devicesController.update);
 
 router.delete('/delete/id', devicesController.delete);
 

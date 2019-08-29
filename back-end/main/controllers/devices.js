@@ -53,6 +53,18 @@ exports.create = (req, res, next) => {
 
 exports.update = (req, res, next) => {
     const deviceId = req.params.deviceId;
+    const slotsAmount = req.query.slots;
+    const monitoredMode = req.query.isMonitored;
+    const description = req.query.description;
+    Device.update({
+        slots_amount: slotsAmount,
+        monitored_mode: monitoredMode,
+        description: description
+    }, id = deviceId).then(result => {
+        console.log(result);
+    }).catch(err => {
+        console.log(err);
+    });
     console.log('Updating device with Id number ' + deviceId);
 }
 

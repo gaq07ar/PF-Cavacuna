@@ -44,7 +44,7 @@ Alarms.belongsTo(Device, { foreignKey: 'device_id' });
 User.belongsTo(UserData, { foreignKey: 'user_data_id' });
 
 // Starting API
-sequelize.sync({ force: true })
+sequelize.sync()
     .then((result) => {
         console.log('Connection to DB successful');
         app.listen(3000);
