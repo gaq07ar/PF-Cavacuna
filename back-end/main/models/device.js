@@ -17,6 +17,7 @@ const Device = sequelize.define('device', {
     },
     monitored_mode: {
         type: Sequelize.BOOLEAN,
+        defaultValue: true,
         allowNull: false
     },
     description: {

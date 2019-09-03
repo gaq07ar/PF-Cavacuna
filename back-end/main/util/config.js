@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 dotenv.config();
+
 module.exports = {
     dbPassword: process.env.CAVACUNA_DB_SERVER_PW,
     dbSchema: process.env.CAVACUNA_DB_DEF_SCHEMA,
