@@ -21,3 +21,4 @@ module.exports = Alarms;
 // Arduino will send 1 if temperature it's <= 2, 2 if it's >= 8
 // If reading from chanel status null then it's turned off
 // If it's forced by user, send the user {$username} has triggered the alarm for reasons: {$reasons}
+// Comment
