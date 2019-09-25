@@ -12,13 +12,15 @@ import { AppComponent } from './app.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { CavacunaComponent } from './components/shared/cavacuna/cavacuna.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     ReportesComponent,
-    NavbarComponent
+    NavbarComponent,
+    CavacunaComponent
   ],
   imports: [
     BrowserModule,
