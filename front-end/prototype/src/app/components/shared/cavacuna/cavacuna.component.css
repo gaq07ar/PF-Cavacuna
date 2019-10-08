@@ -8,3 +8,8 @@
 .card .card-header {
     margin-bottom: -1px;
 }
+
+.settings-icon{
+    width: 30px;
+    height: auto;
+}

@@ -13,6 +13,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { CavacunaComponent } from './components/shared/cavacuna/cavacuna.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CavacunaComponent } from './components/shared/cavacuna/cavacuna.compone
     InicioComponent,
     ReportesComponent,
     NavbarComponent,
-    CavacunaComponent
+    CavacunaComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
