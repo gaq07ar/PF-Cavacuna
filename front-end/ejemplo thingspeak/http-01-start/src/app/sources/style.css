@@ -1,0 +1,16 @@
+body{
+	background-color: lightgreen;
+}
+
+.background{
+	background-color: lightgreen
+}
+
+#sections{
+	height: 1000px
+}
+
+#container { 
+min-height: 100%; 
+heig\ht: 100%; /*Solo para IE6*/ 
+} 

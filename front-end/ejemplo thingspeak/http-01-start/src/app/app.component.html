@@ -1,0 +1,167 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href=""><img src="/assets/logov4.png" alt="cavacuna_logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-info" href="home.html">Inicio<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-info" href="#">Reportes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-info" href="users.html">Usuarios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-info" href="#">Configuración</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-info" href="index.html">Cerrar Sesión</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row my-5">
+    <div class="col-3">
+
+    </div>
+    <div class="col-6">
+      <div id="accordion">
+        <div class="card text-center">
+          <div class="card-header" id="heladera1">
+            <p class="mb-0 text-center card-text text-info">
+              <button class="btn btn-light text-center text-info" type="button" data-toggle="collapse"
+                data-target="#respuesta1" aria-expanded="false" aria-controls="respuesta1">HELADERA Nº1</button>
+            </p>
+          </div>
+          <div id="respuesta1" class="collapse" aria-labelledby="heladera1" data-parent="#accordion">
+            <div class="card-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Slot</th>
+                    <th>Tipo de vacuna</th>
+                    <th>Disponible</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Antirábica</td>
+                    <td>Sí</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Sarampion</td>
+                    <td>No</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer">
+              <p class="card-text"><span class="badge badge-success">{{device.temperature}}ºC</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="card text-center">
+          <div class="card-header" id="heladera2">
+            <p class="mb-0 text-center card-text text-info">
+              <button class="btn btn-light text-center text-info" type="button" data-toggle="collapse"
+                data-target="#respuesta2" aria-expanded="false" aria-controls="respuesta2">HELADERA Nº2</button>
+            </p>
+          </div>
+          <div id="respuesta2" class="collapse" aria-labelledby="heladera2" data-parent="#accordion">
+            <div class="card-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Slot</th>
+                    <th>Tipo de vacuna</th>
+                    <th>Disponible</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Antirábica</td>
+                    <td>Sí</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Sarampion</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Sarampion</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Sarampion</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Sarampion</td>
+                    <td>No</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer">
+              <p class="card-text"><span class="badge badge-warning">{{device.temperature}} ºC</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="card text-center">
+          <div class="card-header" id="heladera3">
+            <p class="mb-0 text-center card-text text-info">
+              <button class="btn btn-light text-center text-info" type="button" data-toggle="collapse"
+                data-target="#respuesta3" aria-expanded="false" aria-controls="respuesta2">HELADERA Nº3</button>
+            </p>
+          </div>
+          <div id="respuesta3" class="collapse" aria-labelledby="heladera3" data-parent="#accordion">
+            <div class="card-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Slot</th>
+                    <th>Tipo de vacuna</th>
+                    <th>Disponible</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Antirábica</td>
+                    <td>Sí</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Sarampion</td>
+                    <td>No</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Sarampion</td>
+                    <td>No</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-footer">
+              <p class="card-text"><span class="badge badge-danger">{{device.temperature}} ºC</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+
+      </div>
+    </div>
+  </div>
