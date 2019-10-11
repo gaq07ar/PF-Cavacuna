@@ -1,0 +1,22 @@
+.icono-menu{
+    width: 20px;
+    height: auto;
+}
+
+.cavacuna-logo{
+    width: 300px;
+    height: auto;
+    margin: auto;
+    padding: 0 0 20px 0;
+    display: block;
+}
+
+body{
+    height: 100vh;
+    min-height: 500px;
+    background: url(../../../assets/img/landing-bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
