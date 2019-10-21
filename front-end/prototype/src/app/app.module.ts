@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 //Rutas
 import { APP_ROUTING } from './app.routes';
@@ -14,6 +15,11 @@ import { ReportesComponent } from './components/reportes/reportes.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { CavacunaComponent } from './components/shared/cavacuna/cavacuna.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { LoginCardComponent } from './components/login/login-card/login-card.component';
+import { LoginbarComponent } from './components/shared/loginbar/loginbar.component';
+
 
 @NgModule({
   declarations: [
@@ -22,11 +28,15 @@ import { LandingComponent } from './components/landing/landing.component';
     ReportesComponent,
     NavbarComponent,
     CavacunaComponent,
-    LandingComponent
+    LandingComponent,
+    LoginComponent,
+    SignupComponent,
+    LoginCardComponent,
+    LoginbarComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    ReactiveFormsModule,
     APP_ROUTING
   ],
   providers: [],
