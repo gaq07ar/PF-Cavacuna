@@ -1,5 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Cavacuna</a>
+
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-custom bg-custom">
+    <a class="navbar-brand" routerLink="">
+      <img class="cavacuna-logo" src="../../../assets/img/logov3.png" alt="Cavacuna">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,10 +12,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['inicio']">Home <span class="sr-only">(current)</span></a>
+            <h5><a class="nav-link text-black-50" [routerLink]="['inicio']">Home <span class="sr-only">(current)</span></a></h5>
         </li>
         <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['reportes']">Reportes</a>
+          <h5><a class="nav-link text-black-50" [routerLink]="['reportes']">Reportes</a></h5>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto nav-flex-icons">
@@ -30,3 +34,4 @@
       </ul>
     </div>
   </nav>
+</div>

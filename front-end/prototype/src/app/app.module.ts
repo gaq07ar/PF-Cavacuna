@@ -21,6 +21,7 @@ import { LoginCardComponent } from './components/login/login-card/login-card.com
 import { LoginbarComponent } from './components/shared/loginbar/loginbar.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
