@@ -20,10 +20,8 @@
         <li *ngIf="!auth.loggedIn" (click)="auth.login()" class="nav-item">
           <h5><a class="nav-link text-black-50" routerLink="">Ingresar</a></h5>
         </li>
-        <button id="loginPopup">Login with Popup</button>
         <li *ngIf="auth.loggedIn" (click)="auth.logout()" class="nav-item">
           <h5><a class="nav-link text-black-50" routerLink="">Salir</a></h5>
-          <button id="loginPopup">Login with Popup</button>
         </li>
       </ul>
       <!-- <ul class="navbar-nav ml-auto nav-flex-icons">
