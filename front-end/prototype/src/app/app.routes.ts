@@ -5,6 +5,7 @@ import { InicioComponent } from "./components/inicio/inicio.component";
 import { ReportesComponent } from "./components/reportes/reportes.component";
 import { LandingComponent } from "./components/landing/landing.component";
 import { SignupComponent } from "./components/signup/signup.component";
+import { CallbackComponent } from "./components/callback/callback.component";
 
 const routes: Routes = [
   { path: "", component: LandingComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "inicio", component: InicioComponent },
   { path: "reportes", component: ReportesComponent },
+  { path: "callback", component: CallbackComponent },
   { path: "**", pathMatch: "full", redirectTo: "" }
 ];
 
