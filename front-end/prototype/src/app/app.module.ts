@@ -16,8 +16,6 @@ import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { LoginCardComponent } from "./components/login/login-card/login-card.component";
 import { LoginbarComponent } from "./components/shared/loginbar/loginbar.component";
-import { CallbackComponent } from './components/callback/callback.component';
-
 
 @NgModule({
   declarations: [
@@ -30,8 +28,7 @@ import { CallbackComponent } from './components/callback/callback.component';
     LoginComponent,
     SignupComponent,
     LoginCardComponent,
-    LoginbarComponent,
-    CallbackComponent
+    LoginbarComponent
   ],
   imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule],
   providers: [],
