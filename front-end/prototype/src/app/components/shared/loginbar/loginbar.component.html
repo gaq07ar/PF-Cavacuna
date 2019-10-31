@@ -17,6 +17,12 @@
         <li class="nav-item" routerLinkActive="active">
           <h5><a class="nav-link text-black-50" routerLink="/login">Iniciar sesión</a></h5>
         </li>
+        <li *ngIf="!auth.loggedIn" (click)="auth.login('/inicio')" class="nav-item">
+          <h5><a class="nav-link text-black-50" routerLink="">Ingresar</a></h5>
+        </li>
+        <li *ngIf="auth.loggedIn" (click)="auth.logout()" class="nav-item">
+          <h5><a class="nav-link text-black-50" routerLink="">Salir</a></h5>
+        </li>
       </ul>
       <!-- <ul class="navbar-nav ml-auto nav-flex-icons">
                 <li class="nav-item dropdown">
@@ -33,6 +39,8 @@
                 </li>
               </ul> -->
     </div>
+
+
   </nav>
 
 </div>
