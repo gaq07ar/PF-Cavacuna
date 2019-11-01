@@ -17,7 +17,7 @@
         <li class="nav-item" routerLinkActive="active">
           <h5><a class="nav-link text-black-50" routerLink="/login">Iniciar sesión</a></h5>
         </li>
-        <li *ngIf="!auth.loggedIn" (click)="auth.login()" class="nav-item">
+        <li *ngIf="!auth.loggedIn" (click)="auth.login('/inicio')" class="nav-item">
           <h5><a class="nav-link text-black-50" routerLink="">Ingresar</a></h5>
         </li>
         <li *ngIf="auth.loggedIn" (click)="auth.logout()" class="nav-item">

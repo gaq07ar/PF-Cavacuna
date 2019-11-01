@@ -21,7 +21,7 @@ export class AuthService {
     createAuth0Client({
       domain: "cavacuna.eu.auth0.com",
       client_id: "hDYLFfmCpVnpLd6Kz2IP34B9JjyyaTNZ",
-      redirect_uri: `${window.location.origin}/callback`
+      redirect_uri: `${window.location.origin}`
     })
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
@@ -76,14 +76,14 @@ export class AuthService {
     });
   }
 
-  login(redirectPath: string = "/") {
+  login(redirectPath: string = "/inicio") {
     // A desired redirect path can be passed to login method
     // (e.g., from a route guard)
     // Ensure Auth0 client instance exists
     this.auth0Client$.subscribe((client: Auth0Client) => {
       // Call method to log in
       client.loginWithRedirect({
-        redirect_uri: `${window.location.origin}/callback`,
+        redirect_uri: `${window.location.origin}`,
         appState: { target: redirectPath }
       });
     });
