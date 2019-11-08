@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app.routes";
+import { HttpClientModule } from "@angular/common/http";
 
 //Servicios
 
@@ -30,7 +31,12 @@ import { LoginbarComponent } from "./components/shared/loginbar/loginbar.compone
     LoginCardComponent,
     LoginbarComponent
   ],
-  imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
