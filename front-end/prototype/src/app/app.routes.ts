@@ -7,6 +7,7 @@ import { LandingComponent } from "./components/landing/landing.component";
 import { InicioComponent } from "./components/inicio/inicio.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { LoginComponent } from "./components/login/login.component";
+import { ConfigComponent } from "./components/config/config.component";
 
 const routes: Routes = [
   { path: "", component: LandingComponent },
@@ -20,6 +21,11 @@ const routes: Routes = [
   {
     path: "reportes",
     component: ReportesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "config",
+    component: ConfigComponent,
     canActivate: [AuthGuard]
   },
   { path: "**", pathMatch: "full", redirectTo: "" }
