@@ -9,6 +9,8 @@ import { Slot } from "../slot.model";
 })
 export class CavacunaComponent implements OnInit {
   @Input() device: Device;
+  @Input() i: number;
+
   slots: Slot[] = [
     new Slot(1, "Hepatitis B", false),
     new Slot(2, "Neumococo conjugado", false),

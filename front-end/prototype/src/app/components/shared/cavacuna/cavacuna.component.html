@@ -1,19 +1,19 @@
 <div class="card">
-  <div class="card-header" id="headingX">
+  <div class="card-header" id="heading{{i}}">
     <h2 class="mb-0">
-      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseX" aria-expanded="false"
-        aria-controls="collapseX">
+      <button class="btn btn-link" type="button" data-toggle="collapse" attr.data-target="#collapse{{i}}"
+        aria-expanded="false" attr.aria-controls="collapse{{i}}">
         Cavacuna #{{ device.id }}
       </button>
       Temp {{ device.max_temp }}
-      <button class="btn btn-link float-right" type="button" data-toggle="collapse" data-target="#collapseX2"
-        aria-expanded="false" aria-controls="collapseX2">
+      <button class="btn btn-link float-right" type="button" data-toggle="collapse" attr.data-target="#collapseX{{i}}"
+        aria-expanded="false" attr.aria-controls="collapseX{{i}}">
         <img class="settings-icon" src="../../../../assets/img/settings-gears.svg" alt="gear">
       </button>
     </h2>
   </div>
 
-  <div id="collapseX" class="collapse" aria-labelledby="headingX" data-parent="#accordionExample">
+  <div id="collapse{{i}}" class="collapse" attr.aria-labelledby="heading{{i}}" data-parent="#accordionExample">
     <div class="card-body">
       <table class="table">
         <thead>
@@ -42,7 +42,7 @@
 
 
 
-  <div id="collapseX2" class="collapse" aria-labelledby="headingX2" data-parent="#accordionExample">
+  <div id="collapseX{{i}}" class="collapse" attr.aria-labelledby="headingX{{i}}" data-parent="#accordionExample">
     <div class="card-body">
       <div class="container">
         <div class="custom-control custom-checkbox mb-3">

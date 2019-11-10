@@ -14,7 +14,7 @@
 
     <div class="accordion" id="accordionExample">
 
-      <app-cavacuna *ngFor="let deviceElement of devices" [device]=deviceElement></app-cavacuna>
+      <app-cavacuna *ngFor="let deviceElement of devices; let j = index" [device]=deviceElement [i]=j></app-cavacuna>
 
     </div>
 

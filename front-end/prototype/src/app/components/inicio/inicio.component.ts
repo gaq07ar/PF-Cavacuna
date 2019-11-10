@@ -3,6 +3,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { HttpClient } from "@angular/common/http";
 import { Device } from "../shared/device.model";
 import { map } from "rxjs/operators";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: "app-inicio",
@@ -10,12 +11,7 @@ import { map } from "rxjs/operators";
   styleUrls: ["./inicio.component.css"]
 })
 export class InicioComponent implements OnInit {
-  devices: Device[] = [
-    new Device(1234, 4, true, "Testing", 2, 8),
-    new Device(5768, 4, true, "Testing", 2, 8),
-    new Device(9923, 4, true, "Testing", 2, 8),
-    new Device(9921, 4, true, "Testing", 2, 8)
-  ];
+  devices: Device[] = [];
 
   constructor(public auth: AuthService, private http: HttpClient) {}
 
@@ -25,8 +21,19 @@ export class InicioComponent implements OnInit {
   }
 
   private fetchDevices() {
-    this.http.get("http://localhost:3000/api/device").subscribe(posts => {
-      console.log(posts);
-    });
+    this.http
+      .get<Device[]>("http://" + environment.cavacunaAPIAddress + "/api/device")
+      .pipe(
+        map(responseData => {
+          const deviceArray: Device[] = [];
+          for (const element of responseData) {
+            deviceArray.push(element);
+          }
+          return deviceArray;
+        })
+      )
+      .subscribe(devices => {
+        this.devices = devices;
+      });
   }
 }
