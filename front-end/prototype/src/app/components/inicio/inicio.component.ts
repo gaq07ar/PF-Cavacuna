@@ -12,12 +12,17 @@ import { environment } from "../../../environments/environment";
 })
 export class InicioComponent implements OnInit {
   devices: Device[] = [];
+  isUserVerified: boolean;
 
   constructor(public auth: AuthService, private http: HttpClient) {}
 
   ngOnInit() {
-    //console.log(this.auth.userProfile$);
+    // console.log(this.auth.userProfile$);
+    this.isVerified();
     this.fetchDevices();
+    if (!this.isUserVerified) {
+      document.getElementById("modalVerification").click();
+    }
   }
 
   private fetchDevices() {
@@ -35,5 +40,13 @@ export class InicioComponent implements OnInit {
       .subscribe(devices => {
         this.devices = devices;
       });
+  }
+
+  private isVerified() {
+    this.auth.userProfile$.subscribe(userInfo => {
+      if (userInfo.hasOwnProperty("email_verified")) {
+        this.isUserVerified = userInfo.email_verified;
+      }
+    });
   }
 }
