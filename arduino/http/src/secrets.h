@@ -7,4 +7,4 @@
 
 #define SECRET_CH_ID 171717			// replace 0000000 with your channel number
 #define SECRET_WRITE_APIKEY "7HX1QRPPSX4OQJCG"   // replace XYZ with your channel write API Key
-#define SECRET_API_ADDRESS "35.225.116.68"
+#define SECRET_API_ADDRESS "localhost"
