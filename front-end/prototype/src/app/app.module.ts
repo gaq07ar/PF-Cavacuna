@@ -18,6 +18,7 @@ import { SignupComponent } from "./components/signup/signup.component";
 import { LoginCardComponent } from "./components/login/login-card/login-card.component";
 import { LoginbarComponent } from "./components/shared/loginbar/loginbar.component";
 import { ConfigComponent } from './components/config/config.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ConfigComponent } from './components/config/config.component';
     SignupComponent,
     LoginCardComponent,
     LoginbarComponent,
-    ConfigComponent
+    ConfigComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
