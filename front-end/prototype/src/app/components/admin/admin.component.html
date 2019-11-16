@@ -1,0 +1,42 @@
+
+<div class="container">
+    <div class="row border-bottom">
+        <h2 class="ml-3">Usuarios registrados</h2>
+    </div>
+    <div class="row container mt-3">
+        <div class="container">
+            <div class="row mt-2">
+                <div class="col-12">
+
+                    <ul>
+                        <li *ngFor="let usuario of usuarios">
+                            <div class="container">
+                                <div class="row mb-4">
+                                    <div class="col-6">
+                                        <h5>{{usuario}}</h5>
+                                    </div>
+                                    <div class="col-3 align-content-end">
+                                        <label class="active">
+                                            <input type="checkbox" checked>Mandar mail
+                                        </label>
+                                    </div>
+                                    <div class="col-3">
+                                        <button (click)="bajaUsuario(usuario.nombre)" type="button" class="btn btn-secondary">Eliminar usuario</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="row"></div>
+                        <div class="col-12">
+                            <button (click)="altaUsuario()" type="button" class="btn btn-primary mr-3">Añadir Usuario</button>
+                            <button type="button" class="btn btn-info">Guardar cambios</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
