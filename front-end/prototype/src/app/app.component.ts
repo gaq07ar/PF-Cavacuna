@@ -7,6 +7,7 @@ import { AuthService } from "./services/auth.service";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
+  
   name = "proyecto Cavacuna";
   temp1 = "17°";
   temp2 = "8°";
