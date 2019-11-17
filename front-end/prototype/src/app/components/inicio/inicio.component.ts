@@ -11,6 +11,10 @@ import { environment } from "../../../environments/environment";
   styleUrls: ["./inicio.component.css"]
 })
 export class InicioComponent implements OnInit {
+
+  //hardcodeado
+  admin = true;
+
   devices: Device[] = [];
   isUserVerified: boolean;
 
