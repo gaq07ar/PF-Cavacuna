@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Device } from "../shared/device.model";
 import { map } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
+import { DevicesService } from "src/app/services/devices.service";
 
 @Component({
   selector: "app-inicio",
@@ -11,45 +12,38 @@ import { environment } from "../../../environments/environment";
   styleUrls: ["./inicio.component.css"]
 })
 export class InicioComponent implements OnInit {
-
   //hardcodeado
-  admin = true;
-
+  admin = false;
   devices: Device[] = [];
-  isUserVerified: boolean;
+  isUserVerified = false;
+  isFetching = false;
 
-  constructor(public auth: AuthService, private http: HttpClient) {}
+  constructor(
+    public auth: AuthService,
+    private http: HttpClient,
+    private devicesService: DevicesService
+  ) {}
 
   ngOnInit() {
     // console.log(this.auth.userProfile$);
-    this.isVerified();
-    this.fetchDevices();
-    if (!this.isUserVerified) {
-      document.getElementById("modalVerification").click();
-    }
-  }
-
-  private fetchDevices() {
-    this.http
-      .get<Device[]>("http://" + environment.cavacunaAPIAddress + "/api/device")
-      .pipe(
-        map(responseData => {
-          const deviceArray: Device[] = [];
-          for (const element of responseData) {
-            deviceArray.push(element);
-          }
-          return deviceArray;
-        })
-      )
-      .subscribe(devices => {
-        this.devices = devices;
-      });
-  }
-
-  private isVerified() {
+    this.isFetching = true;
     this.auth.userProfile$.subscribe(userInfo => {
       if (userInfo.hasOwnProperty("email_verified")) {
         this.isUserVerified = userInfo.email_verified;
+      }
+      if (this.isUserVerified) {
+        this.devicesService.fetchDevices().subscribe(
+          devices => {
+            this.isFetching = false;
+            this.devices = devices;
+          },
+          error => {
+            this.isFetching = false;
+          }
+        );
+      } else {
+        this.isFetching = false;
+        document.getElementById("modalVerification").click();
       }
     });
   }
