@@ -19,10 +19,6 @@
         ></app-cavacuna>
       </div>
 
-      <h5 *ngIf="admin" class="container text-center mt-3">
-        Interesado en ser administrador? Contáctenos <a href="mailto:cavacuna.project@gmail.com">aquí</a>
-      </h5>
-
       <div
         *ngIf="isUserVerified && devices.length === 0"
         class="alert alert-primary"
@@ -32,6 +28,10 @@
         administrador.
       </div>
     </div>
+
+    <h5 *ngIf="admin" class="container text-center mt-3">
+      Interesado en ser administrador? Contáctenos <a href="mailto:cavacuna.project@gmail.com">aquí</a>
+    </h5>
 
     <button
       id="modalVerification"

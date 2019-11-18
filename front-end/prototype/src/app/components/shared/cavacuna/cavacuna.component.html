@@ -26,7 +26,14 @@
         <tbody>
           <tr *ngFor="let slot of slots">
             <th scope="row">{{slot.slotNumber}}</th>
-            <td>{{slot.vaccineDescription}}</td>
+            <td>
+              <div class="form-group">
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option *ngFor="let vacuna of vacunas">{{vacuna}}</option>
+                </select>
+              </div>
+            </td>
+            <!-- <td>{{slot.vaccineDescription}}</td> -->
             <td>
               <div class="form-group form-check">
                 <!-- Bindear con {{slot.isApplied}} -->
