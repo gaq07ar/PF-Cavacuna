@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "src/app/services/auth.service";
+import { UserService } from "src/app/services/user.service";
 
 @Component({
   selector: "app-admin",
@@ -6,14 +8,35 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./admin.component.css"]
 })
 export class AdminComponent implements OnInit {
-  public usuarios = ["Nico", "Gabi", "Dami", "Nacho"];
+  isFetching = false;
+  users: [[string, string]];
 
-  altaUsuario() {
+  constructor(public auth: AuthService, private userService: UserService) {}
+
+  ngOnInit() {
+    this.isFetching = true;
+    this.getUsuariosForAdmin();
+    this.isFetching = false;
+  }
+
+  createUser() {
     let isValid: boolean = false;
     while (!isValid) {
-      let usuario: string = prompt("Escriba el nombre del usuario nuevo");
-      if (usuario.length >= 6) {
-        this.usuarios.push(usuario);
+      let newUserAndDeviceId: string = prompt(
+        "Escriba el nombre del usuario nuevo y el id de la vacuna separada por espacio"
+      );
+      if (newUserAndDeviceId.length >= 6) {
+        let splitted = newUserAndDeviceId.split(" ");
+        let userId = splitted[0];
+        let deviceId = splitted[1];
+        this.auth.userProfile$.subscribe(userInfo => {
+          this.userService
+            .addUserToAdmin(userInfo.email, userId, deviceId)
+            .subscribe(newUser => {
+              this.users.push([userId, deviceId]);
+              alert("Usuario añadido correctamente");
+            });
+        });
         isValid = true;
       } else {
         alert(
@@ -23,15 +46,21 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  bajaUsuario(nombre) {
-    for (var i = 0; i < this.usuarios.length; i++) {
-      if (this.usuarios[i] == nombre) {
-        this.usuarios.splice(i, 1);
+  deleteUser(userId) {
+    for (var i = 0; i < this.users.length; i++) {
+      if (this.users[i] == userId) {
+        this.users.splice(i, 1);
       }
     }
   }
 
-  constructor() {}
-
-  ngOnInit() {}
+  getUsuariosForAdmin() {
+    this.auth.userProfile$.subscribe(userInfo => {
+      this.userService
+        .fetchRegisteredUsersForAdmin(userInfo.email)
+        .subscribe(users => {
+          this.users = users;
+        });
+    });
+  }
 }

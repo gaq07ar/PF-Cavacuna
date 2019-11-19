@@ -2,7 +2,7 @@ import { Injectable, OnInit } from "@angular/core";
 import { AuthService } from "./auth.service";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { Subject, BehaviorSubject } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import { User } from "../components/shared/user.model";
 
 @Injectable({
@@ -29,4 +29,24 @@ export class UserService implements OnInit {
   }
 
   ngOnInit() {}
+
+  fetchRegisteredUsersForAdmin(adminId: string) {
+    return this.http.get<[[string, string]]>(
+      "http://" +
+        environment.cavacunaAPIAddress +
+        "/api/user/getRegisteredUsersForAdmin/" +
+        adminId
+    );
+  }
+
+  addUserToAdmin(adminId: string, userId: string, deviceId) {
+    return this.http.post(
+      "http://" + environment.cavacunaAPIAddress + "/api/user/addUserToAdmin",
+      {
+        adminId: adminId,
+        userId: userId,
+        deviceId: deviceId
+      }
+    );
+  }
 }

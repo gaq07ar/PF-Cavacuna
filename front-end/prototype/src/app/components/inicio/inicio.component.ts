@@ -11,7 +11,6 @@ import { Subscription } from "rxjs";
   styleUrls: ["./inicio.component.css"]
 })
 export class InicioComponent implements OnInit, OnDestroy {
-  //hardcodeado
   isAdmin: boolean;
   devices: Device[] = [];
   isUserVerified = false;
@@ -47,7 +46,7 @@ export class InicioComponent implements OnInit, OnDestroy {
         this.isUserVerified = userInfo.email_verified;
       }
       if (this.isUserVerified) {
-        this.devicesService.fetchDevices().subscribe(
+        this.devicesService.fetchDevices(userInfo.email).subscribe(
           devices => {
             this.isFetching = false;
             this.devices = devices;

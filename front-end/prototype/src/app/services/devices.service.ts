@@ -10,9 +10,14 @@ import { Device } from "../components/shared/device.model";
 export class DevicesService {
   constructor(private http: HttpClient) {}
 
-  fetchDevices() {
+  fetchDevices(username: string) {
     return this.http
-      .get<Device[]>("http://" + environment.cavacunaAPIAddress + "/api/device")
+      .get<Device[]>(
+        "http://" +
+          environment.cavacunaAPIAddress +
+          "/api/device/getDevicesForUser/" +
+          username
+      )
       .pipe(
         map(responseData => {
           const deviceArray: Device[] = [];
