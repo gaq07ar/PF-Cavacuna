@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app.routes";
 import { HttpClientModule } from "@angular/common/http";
 
@@ -17,8 +17,8 @@ import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { LoginCardComponent } from "./components/login/login-card/login-card.component";
 import { LoginbarComponent } from "./components/shared/loginbar/loginbar.component";
-import { ConfigComponent } from './components/config/config.component';
-import { AdminComponent } from './components/admin/admin.component';
+import { ConfigComponent } from "./components/config/config.component";
+import { AdminComponent } from "./components/admin/admin.component";
 
 @NgModule({
   declarations: [
@@ -39,7 +39,8 @@ import { AdminComponent } from './components/admin/admin.component';
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
