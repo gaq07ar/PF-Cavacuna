@@ -1,6 +1,6 @@
 <div class="color-azul">
   <div style="text-align:center">
-    <h1 class="m-5">
+    <h1 class="m-5 text-monospace text-uppercase font-weight-bold text-info">
       Bienvenido a Cavacuna
     </h1>
   </div>
@@ -9,7 +9,10 @@
     <code>{{ profile | json }}</code>
   </pre> -->
 
+
+
   <div class="container">
+
     <div class="accordion" id="accordionExample">
       <div *ngIf="isUserVerified && !isFetching">
         <app-cavacuna *ngFor="let deviceElement of devices; let j = index" [device]="deviceElement" [i]="j">
