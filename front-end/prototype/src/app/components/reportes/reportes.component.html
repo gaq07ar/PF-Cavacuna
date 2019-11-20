@@ -9,24 +9,23 @@
             </select>
         </div>
     </div>
-    <div class="row" *ngIf="selectedDevice != null">
+    <!-- <div class="row" *ngIf="selectedDevice != null">
         <div class="col-mb-2" style="width: 100%">
 
         </div>
         <div class="col-mb-8 align-self-center">
             <li class="list-group-item" style="background-color: aliceblue">
                 <label for="fecha_desde" class="text-info">Desde: </label>
-                <input type="date" id="fecha_desde" name="fecha_desde" class="ml-3">
+                <input type="date" id="fecha_desde" name="fecha_desde" class="ml-3" [(ngModel)]="minDate">
                 <label for="fecha_hasta" class="ml-3 text-info">Hasta: </label>
-                <input type="date" id="fecha_hasta" name="fecha_hasta" class="ml-3">
-                <button class="btn-info btn ml-3">Buscar</button>
-                <h1> </h1>
+                <input type="date" id="fecha_hasta" name="fecha_hasta" class="ml-3" [(ngModel)]="maxDate">
+                <button class="btn-info btn ml-3" (click)="showValue()">Buscar</button>
             </li>
         </div>
         <div class="col-mb-2">
 
         </div>
-    </div>
+    </div> -->
     <div class="row my-4" *ngIf="selectedDevice != null">
 
         <div class="col-mb-4">

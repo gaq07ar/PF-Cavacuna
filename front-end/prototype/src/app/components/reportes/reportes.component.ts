@@ -14,6 +14,8 @@ export class ReportesComponent implements OnInit {
   isUserVerified = false;
   isFetching = false;
   selectedDevice: Device;
+  // minDate: string;
+  // maxDate: string;
 
   constructor(
     public auth: AuthService,
@@ -21,6 +23,8 @@ export class ReportesComponent implements OnInit {
     public sanitizer: DomSanitizer
   ) {
     this.selectedDevice = null;
+    // this.minDate = null;
+    // this.maxDate = null;
   }
 
   ngOnInit() {
@@ -79,4 +83,9 @@ export class ReportesComponent implements OnInit {
       ".csv"
     );
   }
+
+  // showValue() {
+  //   console.log(this.minDate);
+  //   console.log(this.maxDate);
+  // }
 }
