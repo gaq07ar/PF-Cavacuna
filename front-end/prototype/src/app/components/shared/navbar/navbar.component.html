@@ -10,7 +10,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto align-content-end text-right">
         <!-- <li *ngIf="!auth.loggedIn" class="nav-item" routerLinkActive="active">
           <h5><a class="nav-link text-black-50" routerLink="/signup">Registrate</a></h5>
         </li>
@@ -25,6 +25,9 @@
         </li>
         <li *ngIf="auth.loggedIn" class="nav-item" routerLinkActive="active">
           <h5><a class="nav-link text-black-50" routerLink="reportes">Reportes</a></h5>
+        </li>
+        <li *ngIf="auth.loggedIn && isAdmin && !isFetching" class="nav-item" routerLinkActive="active">
+          <h5><a class="nav-link text-black-50" routerLink="admin">Admin</a></h5>
         </li>
         <ul *ngIf="auth.loggedIn" class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item dropdown pointer">

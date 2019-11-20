@@ -8,6 +8,7 @@ import { InicioComponent } from "./components/inicio/inicio.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { LoginComponent } from "./components/login/login.component";
 import { ConfigComponent } from "./components/config/config.component";
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: "", component: LandingComponent },
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path: "config",
     component: ConfigComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "admin",
+    component: AdminComponent,
     canActivate: [AuthGuard]
   },
   { path: "**", pathMatch: "full", redirectTo: "" }

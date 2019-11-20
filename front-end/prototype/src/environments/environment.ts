@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  cavacunaAPIAddress: "localhost:3000"
+  cavacunaAPIAddress: "35.225.116.68:3000"
 };
 
 /*
