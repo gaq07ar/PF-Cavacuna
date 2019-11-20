@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from "@angular/core";
 import { AuthService } from "./auth.service";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { BehaviorSubject } from "rxjs";
 import { User } from "../components/shared/user.model";
@@ -31,7 +31,7 @@ export class UserService implements OnInit {
   ngOnInit() {}
 
   fetchRegisteredUsersForAdmin(adminId: string) {
-    return this.http.get<[[string, string]]>(
+    return this.http.get<[[string, number]]>(
       "http://" +
         environment.cavacunaAPIAddress +
         "/api/user/getRegisteredUsersForAdmin/" +
@@ -47,6 +47,26 @@ export class UserService implements OnInit {
         userId: userId,
         deviceId: deviceId
       }
+    );
+  }
+
+  removeUserForAdmin(adminId: string, userId: string, deviceId: number) {
+    const options = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      body: {
+        adminId: adminId,
+        userId: userId,
+        deviceId: deviceId
+      }
+    };
+
+    return this.http.delete(
+      "http://" +
+        environment.cavacunaAPIAddress +
+        "/api/user/deleteRegisteredUserForAdmin",
+      options
     );
   }
 }

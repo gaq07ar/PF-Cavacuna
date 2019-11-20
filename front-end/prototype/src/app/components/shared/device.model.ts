@@ -1,5 +1,5 @@
 export class Device {
-  public createdAt: string;
+  public created_at: string;
   public id: number;
   public slots_amount: number;
   public monitored_mode: boolean;
@@ -9,7 +9,7 @@ export class Device {
   public updatedAt: string;
 
   constructor(
-    createdAt: string,
+    created_at: string,
     id: number,
     slots_amount: number,
     monitored_mode: boolean,
@@ -18,7 +18,7 @@ export class Device {
     max_temp: number,
     updatedAt: string
   ) {
-    this.createdAt = createdAt;
+    this.created_at = created_at;
     this.id = id;
     this.slots_amount = slots_amount;
     this.monitored_mode = monitored_mode;
