@@ -1,3 +1,47 @@
-<div class="container h-50 color-azul">
-    <p>reportes works!</p>
+<div class="container color-azul">
+    <div class="row">
+        <div class="col-mb-3" style="text-align: center">
+            
+        </div>
+        <div class="col-mb-9" style="text-align: center">
+                <h2 class="text-monospace text-info">HELADERA Nº1</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-mb-2" style="width: 100%">
+            
+        </div>
+        <div class="col-mb-8 align-self-center">
+            <li class="list-group-item" style="background-color: aliceblue">
+                <label for="fecha_desde" class="text-info">Desde: </label>
+                <input type="date" id="fecha_desde" name="fecha_desde" class="ml-3">
+                <label for="fecha_hasta" class="ml-3 text-info">Hasta: </label>
+                <input type="date" id="fecha_hasta" name="fecha_hasta" class="ml-3">
+                <button class="btn-info btn ml-3">Buscar</button>   
+                <h1>                                                        </h1>
+             </li>                
+        </div>
+        <div class="col-mb-2">
+            
+        </div>
+    </div>
+    <div class="row my-4" >
+        <div class="col-mb-4">
+            <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/857320/charts/1?bgcolor=%23ffffff&color=%239fe1fd&dynamic=true&results=60&title=Hist%C3%B3rico+de+Temperaturas&type=line&xaxis=Minutos&yaxis=Grados"></iframe>
+        </div>
+        <div class="col-mb-4">
+
+        </div>
+        <div class="col-mb-4 ml-5">
+            <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/857320/widgets/120776"></iframe>
+        </div>
+    </div>
+    <div class="row my-4">
+            <div class="col-mb-6">
+                <a class="btn btn-info" href="https://thingspeak.com/channels/857320/field/1.csv" role="button">Exportar</a>
+            </div>
+            <div class="col-mb-6">
+                
+            </div>
+    </div>
 </div>
