@@ -18,6 +18,8 @@ export class CavacunaComponent implements OnInit {
     new Slot(4, "Probando aplicada", true)
   ];
 
+  vacunas = ["vacu1", "vacu2", "vacu3","vacu4", "vacu5"];
+
   constructor() {}
 
   ngOnInit() {}
