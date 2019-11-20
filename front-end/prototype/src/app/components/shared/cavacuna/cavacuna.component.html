@@ -1,9 +1,16 @@
-<div class="card text-center">
+<div class="card text-center" [ngClass]="
+  { 
+    'text-white bg-primary': checkColdDangerValidation(actualTemperature),
+    'text-white bg-warning': checkWarningValidation(actualTemperature),
+    'text-white bg-danger': checkHotDangerValidation(actualTemperature)
+  }">
   <div class="card-header text-info" id="heading{{i}}">
     <h2 class="mb-0 text-info card-text">
-      <button class="btn btn-link text-info card-text" type="button" data-toggle="collapse"
-        attr.data-target="#collapse{{i}}" aria-expanded="false" attr.aria-controls="collapse{{i}}">
-        {{ device.description | uppercase}}
+      <button class="btn card-text" [ngClass]="{ 
+        'text-white': checkColdDangerValidation(actualTemperature) || checkHotDangerValidation(actualTemperature) || checkWarningValidation(actualTemperature)
+      }" type="button" data-toggle="collapse" attr.data-target="#collapse{{i}}" aria-expanded="false"
+        attr.aria-controls="collapse{{i}}">
+        {{ device.description }}
       </button>
 
       <button class="btn btn-link float-right" type="button" data-toggle="collapse" attr.data-target="#collapseX{{i}}"
@@ -15,16 +22,33 @@
 
   <div id="collapse{{i}}" class="collapse" attr.aria-labelledby="heading{{i}}" data-parent="#accordionExample">
     <div class="card-body">
-      <table class="table">
+      <table class="table" [ngClass]="
+      { 
+        'bg-primary': checkColdDangerValidation(actualTemperature),
+        'bg-warning': checkWarningValidation(actualTemperature),
+        'bg-danger': checkHotDangerValidation(actualTemperature)
+      }">
         <thead>
-          <tr>
+          <tr class="" [ngClass]="
+          { 
+            'text-white': 
+              checkColdDangerValidation(actualTemperature) || 
+              checkWarningValidation(actualTemperature) || 
+              checkHotDangerValidation(actualTemperature)
+          }">
             <th scope="col">#Slot</th>
             <th scope="col">Vacuna</th>
             <th scope="col">Aplicada</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let slot of slots">
+          <tr *ngFor="let slot of slots" class="" [ngClass]="
+          { 
+            'text-white': 
+              checkColdDangerValidation(actualTemperature) || 
+              checkWarningValidation(actualTemperature) || 
+              checkHotDangerValidation(actualTemperature)
+          }">
             <th scope="row">{{slot.slotNumber}}</th>
             <td>
               <div class="form-group">
@@ -46,9 +70,16 @@
       </table>
     </div>
     <div class="card-footer">
-      <p id="p-temp-{{i}}" class="card-text">
-        <span id="badge-{{i}}" class="badge badge-danger">{{device.max_temp}}</span>
+      <p *ngIf="!isFetching" id="p-temp-{{i}}" class="card-text">
+        <!-- <span id="badge-{{i}}" class="badge" [ngClass]="{ 'badge-danger': actualTemperature > 18,
+        'badge-primary': actualTemperature < 10 }">{{actualTemperature}}</span> -->
+        <span id="badge-{{i}}" class="badge" [ngClass]="{ 
+          'text-white': checkColdDangerValidation(actualTemperature) || checkHotDangerValidation(actualTemperature) || checkWarningValidation(actualTemperature)
+        }">{{actualTemperature}}</span>
       </p>
+      <div *ngIf="isFetching" class="spinner-border spinner-border-sm" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
   </div>
 
