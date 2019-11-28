@@ -32,9 +32,8 @@ export class CavacunaComponent implements OnInit {
   ngOnInit() {
     this.minTemp = Number(this.device.min_temp);
     this.maxTemp = Number(this.device.max_temp);
-    let avg: number = (this.minTemp + this.maxTemp) / 2;
-    this.acceptedRange.push(avg - avg * 0.35);
-    this.acceptedRange.push(avg + avg * 0.35);
+    this.acceptedRange.push(this.minTemp + 2);
+    this.acceptedRange.push(this.maxTemp - 2);
     this.isFetching = true;
     setInterval(() => this.fetchPosts(), 5000);
   }

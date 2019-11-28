@@ -3,6 +3,7 @@ import { Device } from "../shared/device.model";
 import { AuthService } from "src/app/services/auth.service";
 import { DevicesService } from "src/app/services/devices.service";
 import { DomSanitizer } from "@angular/platform-browser";
+import { UserService } from "src/app/services/user.service";
 
 @Component({
   selector: "app-reportes",
@@ -14,12 +15,25 @@ export class ReportesComponent implements OnInit {
   isUserVerified = false;
   isFetching = false;
   selectedDevice: Device;
+  // firstGraph: string =
+  //   "https://thingspeak.com/channels/" +
+  //   this.selectedDevice.id +
+  //   "/charts/1?bgcolor=%23ffffff&color=%239fe1fd&dynamic=true&results=60&title=Hist%C3%B3rico+de+Temperaturas&type=line&xaxis=Minutos&yaxis=Grados";
+  // secondGraph: string =
+  //   "https://thingspeak.com/channels/" +
+  //   this.selectedDevice.id +
+  //   "/widgets/121575";
+
   // minDate: string;
   // maxDate: string;
+  // firstGraph: String =
+  //   "https://thingspeak.com/channels/" +
+  //   this.selectedDevice.id +
+  //   "/charts/1?bgcolor=%23ffffff&color=%239fe1fd&dynamic=true&results=60&title=Hist%C3%B3rico+de+Temperaturas&type=line&xaxis=Minutos&yaxis=Grados";
 
   constructor(
     public auth: AuthService,
-    private devicesService: DevicesService,
+    private userService: UserService,
     public sanitizer: DomSanitizer
   ) {
     this.selectedDevice = null;
@@ -29,26 +43,25 @@ export class ReportesComponent implements OnInit {
 
   ngOnInit() {
     this.isFetching = true;
-    this.processInitialData();
+    this.processInitialInformation();
   }
 
-  private processInitialData() {
-    this.auth.userProfile$.subscribe(userInfo => {
-      if (userInfo.hasOwnProperty("email_verified")) {
-        this.isUserVerified = userInfo.email_verified;
-      }
-      if (this.isUserVerified) {
-        this.devicesService.fetchDevices(userInfo.email).subscribe(
-          devices => {
-            this.isFetching = false;
-            this.devices = devices;
-          },
-          error => {
-            this.isFetching = false;
-          }
-        );
-      }
-    });
+  private async processInitialInformation() {
+    const userInfo = await this.userService.getUserInformation();
+    this.isUserVerified = userInfo.email_verified;
+    const username = userInfo.email;
+    if (this.isUserVerified) {
+      this.devices = await this.userService.getDevicesForUser(username);
+    }
+    // else {
+    //   this.isFetching = false;
+    //   document.getElementById("modalVerification").click();
+    // }
+    this.isFetching = false;
+  }
+
+  onUpdateDevice(event: any) {
+    console.log(event);
   }
 
   bindDevice(device: Device) {
@@ -70,7 +83,7 @@ export class ReportesComponent implements OnInit {
     return (
       "https://thingspeak.com/channels/" +
       this.selectedDevice.id +
-      "/widgets/120776"
+      "/widgets/121575"
     );
   }
 

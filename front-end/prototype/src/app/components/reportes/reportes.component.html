@@ -1,15 +1,16 @@
 <div class="container color-azul">
-
-    <div class="row">
-        <div class="form-group">
-            <label for="selectDevices"><strong>Heladera:</strong></label>
-            <select [(ngModel)]="selectedDevice" class="form-control" id="selectDevices">
-                <option disabled [ngValue]="null">Seleccione una de las heladeras disponibles</option>
-                <option *ngFor="let device of devices" [ngValue]="device">{{device.description}}</option>
-            </select>
-        </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="selectDevices"><strong>Heladera:</strong></label>
+      <select [(ngModel)]="selectedDevice" class="form-control" id="selectDevices" (input)="onUpdateDevice($event)">
+        <option disabled [ngValue]="null">Seleccione una de las heladeras disponibles</option>
+        <option *ngFor="let device of devices" [ngValue]="device">{{
+          device.description
+        }}</option>
+      </select>
     </div>
-    <!-- <div class="row" *ngIf="selectedDevice != null">
+  </div>
+  <!-- <div class="row" *ngIf="selectedDevice != null">
         <div class="col-mb-2" style="width: 100%">
 
         </div>
@@ -26,27 +27,23 @@
 
         </div>
     </div> -->
-    <div class="row my-4" *ngIf="selectedDevice != null">
-
-        <div class="col-mb-4">
-            <iframe width="450" height="260" style="border: 1px solid #cccccc;"
-                [src]="sanitizer.bypassSecurityTrustResourceUrl(getFirstGraph(selectedDevice.id))"></iframe>
-        </div>
-        <div class="col-mb-4">
-
-        </div>
-        <div class="col-mb-4 ml-5" *ngIf="selectedDevice != null">
-            <iframe width="450" height="260" style="border: 1px solid #cccccc;"
-                [src]="sanitizer.bypassSecurityTrustResourceUrl(getSecondGraph(selectedDevice.id))"></iframe>
-        </div>
+  <div class="row my-4" *ngIf="selectedDevice != null">
+    <div class="col-mb-4">
+      <iframe width="450" height="260" style="border: 1px solid #cccccc;"
+        [src]="sanitizer.bypassSecurityTrustResourceUrl()"></iframe>
     </div>
-    <div class="row my-4" *ngIf="selectedDevice != null">
-        <div class="col-mb-6">
-            <a class="btn btn-info" [href]="getCSVFile(selectedDevice.id, selectedDevice.description)"
-                role="button">Exportar</a>
-        </div>
-        <div class="col-mb-6">
-
-        </div>
+    <div class="col-mb-4"></div>
+    <div class="col-mb-4 ml-5" *ngIf="selectedDevice != null">
+      <iframe width="450" height="260" style="border: 1px solid #cccccc;" [src]="
+          sanitizer.bypassSecurityTrustResourceUrl()
+        "></iframe>
     </div>
+  </div>
+  <div class="row my-4" *ngIf="selectedDevice != null">
+    <div class="col-mb-6">
+      <a class="btn btn-info" [href]="getCSVFile(selectedDevice.id, selectedDevice.description)"
+        role="button">Exportar</a>
+    </div>
+    <div class="col-mb-6"></div>
+  </div>
 </div>

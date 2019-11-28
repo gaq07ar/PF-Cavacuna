@@ -1,34 +1,34 @@
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { AuthService } from "./auth.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { BehaviorSubject } from "rxjs";
 import { User } from "../components/shared/user.model";
+import { Device } from "../components/shared/device.model";
+import { DevicesService } from "./devices.service";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
 })
-export class UserService implements OnInit {
-  isAdmin = new BehaviorSubject<boolean>(false);
+export class UserService {
+  constructor(
+    public auth: AuthService,
+    private http: HttpClient,
+    private devicesService: DevicesService
+  ) {}
 
-  constructor(public auth: AuthService, private http: HttpClient) {
-    this.auth.userProfile$.subscribe(userInfo => {
-      if (userInfo != null) {
-        let email = userInfo.email;
-        this.http
-          .get<User>(
-            "http://" + environment.cavacunaAPIAddress + "/api/user/" + email
-          )
-          .subscribe(user => {
-            if (user.hasOwnProperty("is_admin")) {
-              this.isAdmin.next(user.is_admin);
-            }
-          });
-      }
-    });
+  isAdmin(username: string) {
+    return this.http
+      .get<User>(
+        "http://" + environment.cavacunaAPIAddress + "/api/user/" + username
+      )
+      .pipe(
+        map(userData => {
+          return userData.is_admin;
+        })
+      );
   }
-
-  ngOnInit() {}
 
   fetchRegisteredUsersForAdmin(adminId: string) {
     return this.http.get<[[string, number]]>(
@@ -69,4 +69,14 @@ export class UserService implements OnInit {
       options
     );
   }
+
+  async getUserInformation(): Promise<any> {
+    return this.auth.getUser$().toPromise();
+  }
+
+  async getDevicesForUser(username: string): Promise<Device[]> {
+    return this.devicesService.fetchDevices(username).toPromise();
+  }
 }
+
+// .fetchDevices(userInfo.email)

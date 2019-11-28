@@ -14,7 +14,7 @@
   <div class="container">
 
     <div class="accordion" id="accordionExample">
-      <div *ngIf="isUserVerified && !isFetching">
+      <div *ngIf="isUserVerified && !isFetching && devices !== null">
         <app-cavacuna *ngFor="let deviceElement of devices; let j = index" [device]="deviceElement" [i]="j">
         </app-cavacuna>
       </div>
@@ -23,7 +23,8 @@
         ¿Interesado en ser administrador? Contáctenos <a href="mailto:cavacuna.project@gmail.com">aquí</a>
       </h5>
 
-      <div *ngIf="isUserVerified && !isFetching && devices.length === 0" class="alert alert-primary" role="alert">
+      <div *ngIf="isUserVerified && !isFetching && devices !== null && devices.length == 0" class="alert alert-primary"
+        role="alert">
         Al parecer no tiene heladeras asignadas, por favor contacte a su
         administrador.
       </div>

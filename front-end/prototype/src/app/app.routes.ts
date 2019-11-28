@@ -5,15 +5,11 @@ import { RouterModule, Routes } from "@angular/router";
 import { ReportesComponent } from "./components/reportes/reportes.component";
 import { LandingComponent } from "./components/landing/landing.component";
 import { InicioComponent } from "./components/inicio/inicio.component";
-import { SignupComponent } from "./components/signup/signup.component";
-import { LoginComponent } from "./components/login/login.component";
 import { ConfigComponent } from "./components/config/config.component";
-import { AdminComponent } from './components/admin/admin.component';
+import { AdminComponent } from "./components/admin/admin.component";
 
 const routes: Routes = [
   { path: "", component: LandingComponent },
-  { path: "login", component: LoginComponent },
-  { path: "signup", component: SignupComponent },
   {
     path: "inicio",
     component: InicioComponent,
