@@ -24,6 +24,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    //Comment
     this.isFetching = true;
     this.getPermissionInformation();
     this.processInitialData();
