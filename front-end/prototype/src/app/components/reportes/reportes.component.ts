@@ -46,8 +46,14 @@ export class ReportesComponent implements OnInit {
   ngOnInit() {
     this.reportsForm = new FormGroup({
       device: new FormControl(null, Validators.required),
-      startDate: new FormControl(null),
-      endDate: new FormControl(null)
+      startDate: new FormControl(null, [
+        Validators.required,
+        this.invalidStartDate.bind(this)
+      ]),
+      endDate: new FormControl(null, [
+        Validators.required,
+        this.invalidEndDate.bind(this)
+      ])
     });
     this.isFetching = true;
     this.processInitialInformation();
@@ -104,5 +110,34 @@ export class ReportesComponent implements OnInit {
       this.selectedDevice.description +
       ".csv"
     );
+  }
+
+  invalidStartDate(control: FormControl): { [s: string]: boolean } {
+    if (control.parent) {
+      if (control.value !== null && control.parent.value["endDate"] !== null) {
+        const startDate = new Date(control.value);
+        const endDate = new Date(control.parent.value["endDate"]);
+        if (startDate > endDate) {
+          return { startDateInvalid: true };
+        }
+      }
+    }
+    return null;
+  }
+
+  invalidEndDate(control: FormControl): { [s: string]: boolean } {
+    if (control.parent) {
+      if (
+        control.value !== null &&
+        control.parent.value["startDate"] !== null
+      ) {
+        const startDate = new Date(control.parent.value["startDate"]);
+        const endDate = new Date(control.value);
+        if (endDate < startDate) {
+          return { endDateInvalid: true };
+        }
+      }
+    }
+    return null;
   }
 }

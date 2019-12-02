@@ -47,18 +47,17 @@
                                 <th scope="col">Usuario</th>
                                 <th scope="col">Heladera</th>
                                 <th scope="col">Recibe alertas</th>
-                                <th scope="col">Eliminar usuario</th>
+                                <th scope="col">Acción</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let user of users; let i = index">
-                                <th scope="row">{{i}}</th>
+                                <th scope="row">{{i + 1}}</th>
                                 <td>{{user[0]}}</td>
                                 <td>{{user[1]}}</td>
                                 <td><input type="checkbox" checked>Mandar mail</td>
                                 <td><button (click)="deleteUser(user[0], user[1])" type="button"
-                                        class="btn btn-secondary">Eliminar
-                                        usuario</button></td>
+                                        class="btn btn-danger">Eliminar</button></td>
                             </tr>
                         </tbody>
                     </table>
