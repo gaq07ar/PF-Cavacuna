@@ -1,49 +1,69 @@
 <div class="container color-azul">
-  <div class="row">
+  <form [formGroup]="reportsForm" (ngSubmit)="onSubmit()" class="was-validated" #ngForm="ngForm" [ngClass]="
+  { 
+    'was-validated': ngForm.submitted
+  }">
     <div class="form-group">
-      <label for="selectDevices"><strong>Heladera:</strong></label>
-      <select [(ngModel)]="selectedDevice" class="form-control" id="selectDevices" (input)="onUpdateDevice($event)">
-        <option disabled [ngValue]="null">Seleccione una de las heladeras disponibles</option>
-        <option *ngFor="let device of devices" [ngValue]="device">{{
-          device.description
-        }}</option>
+      <label for="selectDevices"><strong>Seleccione una heladera:</strong></label>
+      <select class="form-control" id="selectDevices" (input)="onUpdateDevice($event)" formControlName="device">
+        <option *ngFor="let device of devices" [ngValue]="device">
+          {{ device.description }}
+        </option>
       </select>
     </div>
-  </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col">
+          <label for="startDate1"><strong>Desde:</strong></label>
+          <input type="date" class="form-control" formControlName="startDate" min="2019-07-01" max="2050-11-01"
+            [required]="true" id="startDate1" />
+          <div class="invalid-feedback">
+            This is a danger alert—check it out!
+          </div>
+        </div>
+        <div class="col">
+          <label for="endDate1"><strong>Hasta:</strong></label>
+          <input type="date" class="form-control" formControlName="endDate" min="2019-07-01" max="2050-11-01" required
+            id="endDate1" />
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Generar reporte</button>
+  </form>
   <!-- <div class="row" *ngIf="selectedDevice != null">
-        <div class="col-mb-2" style="width: 100%">
+    <div class="col-mb-2" style="width: 100%">
 
-        </div>
-        <div class="col-mb-8 align-self-center">
-            <li class="list-group-item" style="background-color: aliceblue">
-                <label for="fecha_desde" class="text-info">Desde: </label>
-                <input type="date" id="fecha_desde" name="fecha_desde" class="ml-3" [(ngModel)]="minDate">
-                <label for="fecha_hasta" class="ml-3 text-info">Hasta: </label>
-                <input type="date" id="fecha_hasta" name="fecha_hasta" class="ml-3" [(ngModel)]="maxDate">
-                <button class="btn-info btn ml-3" (click)="showValue()">Buscar</button>
-            </li>
-        </div>
-        <div class="col-mb-2">
+    </div>
+    <div class="col-mb-8 align-self-center">
+      <li class="list-group-item" style="background-color: aliceblue">
+        <label for="fecha_desde" class="text-info">Desde: </label>
+        <input type="date" id="fecha_desde" name="fecha_desde" class="ml-3" [(ngModel)]="minDate">
+        <label for="fecha_hasta" class="ml-3 text-info">Hasta: </label>
+        <input type="date" id="fecha_hasta" name="fecha_hasta" class="ml-3" [(ngModel)]="maxDate">
+        <button class="btn-info btn ml-3" (click)="showValue()">Buscar</button>
+      </li>
+    </div>
+    <div class="col-mb-2">
 
-        </div>
-    </div> -->
-  <div class="row my-4" *ngIf="selectedDevice != null">
-    <div class="col-mb-4">
-      <iframe width="450" height="260" style="border: 1px solid #cccccc;"
-        [src]="sanitizer.bypassSecurityTrustResourceUrl()"></iframe>
     </div>
-    <div class="col-mb-4"></div>
-    <div class="col-mb-4 ml-5" *ngIf="selectedDevice != null">
-      <iframe width="450" height="260" style="border: 1px solid #cccccc;" [src]="
-          sanitizer.bypassSecurityTrustResourceUrl()
-        "></iframe>
+  </div> -->
+  <div *ngIf="selectedDevice != null && reportsForm.valid">
+    <div class="row my-4">
+      <div class="col-mb-4">
+        <iframe width="450" height="260" style="border: 1px solid #cccccc;" [src]="firstGraph"></iframe>
+      </div>
+      <div class="col-mb-4"></div>
+      <div class="col-mb-4 ml-5" *ngIf="selectedDevice != null">
+        <iframe width="450" height="260" style="border: 1px solid #cccccc;" [src]="secondGraph"></iframe>
+      </div>
     </div>
-  </div>
-  <div class="row my-4" *ngIf="selectedDevice != null">
-    <div class="col-mb-6">
-      <a class="btn btn-info" [href]="getCSVFile(selectedDevice.id, selectedDevice.description)"
-        role="button">Exportar</a>
+    <div class="row my-4" *ngIf="selectedDevice != null">
+      <div class="col-mb-6">
+        <a class="btn btn-info" [href]="getCSVFile(selectedDevice.id, selectedDevice.description)"
+          role="button">Exportar</a>
+      </div>
+      <div class="col-mb-6"></div>
     </div>
-    <div class="col-mb-6"></div>
+
   </div>
 </div>

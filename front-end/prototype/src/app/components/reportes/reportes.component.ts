@@ -1,9 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ChangeDetectorRef,
+  AfterViewInit
+} from "@angular/core";
 import { Device } from "../shared/device.model";
 import { AuthService } from "src/app/services/auth.service";
 import { DevicesService } from "src/app/services/devices.service";
-import { DomSanitizer } from "@angular/platform-browser";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { UserService } from "src/app/services/user.service";
+import { NgForm, FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-reportes",
@@ -15,14 +22,9 @@ export class ReportesComponent implements OnInit {
   isUserVerified = false;
   isFetching = false;
   selectedDevice: Device;
-  // firstGraph: string =
-  //   "https://thingspeak.com/channels/" +
-  //   this.selectedDevice.id +
-  //   "/charts/1?bgcolor=%23ffffff&color=%239fe1fd&dynamic=true&results=60&title=Hist%C3%B3rico+de+Temperaturas&type=line&xaxis=Minutos&yaxis=Grados";
-  // secondGraph: string =
-  //   "https://thingspeak.com/channels/" +
-  //   this.selectedDevice.id +
-  //   "/widgets/121575";
+  reportsForm: FormGroup;
+  firstGraph: SafeResourceUrl;
+  secondGraph: SafeResourceUrl;
 
   // minDate: string;
   // maxDate: string;
@@ -42,8 +44,35 @@ export class ReportesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.reportsForm = new FormGroup({
+      device: new FormControl(null, Validators.required),
+      startDate: new FormControl(null),
+      endDate: new FormControl(null)
+    });
     this.isFetching = true;
     this.processInitialInformation();
+  }
+
+  onSubmit() {
+    // console.log(this.reportsForm);
+    if (this.reportsForm.valid) {
+      this.selectedDevice = this.reportsForm.get("device").value;
+      this.firstGraph = this.sanitizer.bypassSecurityTrustResourceUrl(
+        "https://thingspeak.com/channels/" +
+          this.selectedDevice.id +
+          "/charts/1?bgcolor=%23ffffff&color=%239fe1fd&dynamic=true&title=Hist%C3%B3rico+de+Temperaturas&type=line&xaxis=Minutos&yaxis=Grados&start=" +
+          this.reportsForm.get("startDate").value +
+          "%2000:00:00" +
+          "&end=" +
+          this.reportsForm.get("endDate").value +
+          "%2000:00:00"
+      );
+      this.secondGraph = this.sanitizer.bypassSecurityTrustResourceUrl(
+        "https://thingspeak.com/channels/" +
+          this.selectedDevice.id +
+          "/widgets/121575"
+      );
+    }
   }
 
   private async processInitialInformation() {
@@ -53,10 +82,6 @@ export class ReportesComponent implements OnInit {
     if (this.isUserVerified) {
       this.devices = await this.userService.getDevicesForUser(username);
     }
-    // else {
-    //   this.isFetching = false;
-    //   document.getElementById("modalVerification").click();
-    // }
     this.isFetching = false;
   }
 
@@ -71,22 +96,6 @@ export class ReportesComponent implements OnInit {
     }
   }
 
-  getFirstGraph(deviceId: string): string {
-    return (
-      "https://thingspeak.com/channels/" +
-      this.selectedDevice.id +
-      "/charts/1?bgcolor=%23ffffff&color=%239fe1fd&dynamic=true&results=60&title=Hist%C3%B3rico+de+Temperaturas&type=line&xaxis=Minutos&yaxis=Grados"
-    );
-  }
-
-  getSecondGraph(deviceId: string): string {
-    return (
-      "https://thingspeak.com/channels/" +
-      this.selectedDevice.id +
-      "/widgets/121575"
-    );
-  }
-
   getCSVFile(deviceId: string, deviceDescription: string): string {
     return (
       "https://thingspeak.com/channels/" +
@@ -96,9 +105,4 @@ export class ReportesComponent implements OnInit {
       ".csv"
     );
   }
-
-  // showValue() {
-  //   console.log(this.minDate);
-  //   console.log(this.maxDate);
-  // }
 }
