@@ -3,8 +3,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app.routes";
 import { HttpClientModule } from "@angular/common/http";
-
-//Servicios
+import { DataTablesModule } from "angular-datatables";
 
 //Componentes
 import { AppComponent } from "./app.component";
@@ -16,6 +15,8 @@ import { LandingComponent } from "./components/landing/landing.component";
 import { LoginbarComponent } from "./components/shared/loginbar/loginbar.component";
 import { ConfigComponent } from "./components/config/config.component";
 import { AdminComponent } from "./components/admin/admin.component";
+import { UsersComponent } from './components/admin/users/users.component';
+import { DevicesComponent } from './components/admin/devices/devices.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +28,17 @@ import { AdminComponent } from "./components/admin/admin.component";
     LandingComponent,
     LoginbarComponent,
     ConfigComponent,
-    AdminComponent
+    AdminComponent,
+    UsersComponent,
+    DevicesComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,23 +1,21 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { Subject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 import { UserService } from "src/app/services/user.service";
-import { Device } from "../shared/device.model";
 import { DevicesService } from "src/app/services/devices.service";
-import { DataTableDirective } from "angular-datatables";
-import { Subject } from "rxjs";
+import { Device } from "../../shared/device.model";
 
 @Component({
-  selector: "app-admin",
-  templateUrl: "./admin.component.html",
-  styleUrls: ["./admin.component.css"]
+  selector: "app-users",
+  templateUrl: "./users.component.html",
+  styleUrls: ["./users.component.css"]
 })
-export class AdminComponent implements OnInit {
+export class UsersComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   isFetching = false;
   users: [[string, number]] = [["", 0]];
   adminId: string;
-  devices: Device[] = [];
   isUserVerified = false;
 
   constructor(
@@ -113,21 +111,6 @@ export class AdminComponent implements OnInit {
     this.auth.userProfile$.subscribe(userInfo => {
       if (userInfo.hasOwnProperty("email_verified")) {
         this.isUserVerified = userInfo.email_verified;
-      }
-      if (this.isUserVerified) {
-        this.devicesService.fetchDevices(userInfo.email).subscribe(
-          devices => {
-            console.log(devices);
-            this.isFetching = false;
-            this.devices = devices;
-          },
-          error => {
-            this.isFetching = false;
-          }
-        );
-      } else {
-        this.isFetching = false;
-        document.getElementById("modalVerification").click();
       }
     });
   }
