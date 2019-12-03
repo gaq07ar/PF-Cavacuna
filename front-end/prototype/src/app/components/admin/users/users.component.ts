@@ -27,7 +27,31 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: "full_numbers",
-      pageLength: 2
+      pageLength: 2,
+      language: {
+        emptyTable: "No hay información disponible en la tabla",
+        info: "Mostrando _START_ de _END_ de _TOTAL_ entradas",
+        infoEmpty: "Mostrando 0 de 0 de 0 entradas",
+        infoFiltered: "(filtradas de _MAX_ total de entradas)",
+        infoPostFix: "",
+        lengthMenu: "Mostrar _MENU_ entradas",
+        loadingRecords: "Cargando...",
+        processing: "Procesando...",
+        search: "Buscar:",
+        zeroRecords: "No hay resultados para la búsqueda",
+        paginate: {
+          first: "Primera",
+          last: "Última",
+          next: "Siguiente",
+          previous: "Anterior"
+        },
+        aria: {
+          sortAscending:
+            ": activar para ordenar las columnas de forma ascendente",
+          sortDescending:
+            ": activar para ordenar las columnas de forma descendente"
+        }
+      }
     };
     this.isFetching = true;
     this.processInitialData();

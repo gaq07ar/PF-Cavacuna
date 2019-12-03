@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Device } from "../../shared/device.model";
 import { AuthService } from "src/app/services/auth.service";
-import { UserService } from "src/app/services/user.service";
 import { DevicesService } from "src/app/services/devices.service";
 import { Subject } from "rxjs";
 
@@ -26,7 +25,31 @@ export class DevicesComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: "full_numbers",
-      pageLength: 2
+      pageLength: 2,
+      language: {
+        emptyTable: "No hay información disponible en la tabla",
+        info: "Mostrando _START_ de _END_ de _TOTAL_ entradas",
+        infoEmpty: "Mostrando 0 de 0 de 0 entradas",
+        infoFiltered: "(filtradas de _MAX_ total de entradas)",
+        infoPostFix: "",
+        lengthMenu: "Mostrar _MENU_ entradas",
+        loadingRecords: "Cargando...",
+        processing: "Procesando...",
+        search: "Buscar:",
+        zeroRecords: "No hay resultados para la búsqueda",
+        paginate: {
+          first: "Primera",
+          last: "Última",
+          next: "Siguiente",
+          previous: "Anterior"
+        },
+        aria: {
+          sortAscending:
+            ": activar para ordenar las columnas de forma ascendente",
+          sortDescending:
+            ": activar para ordenar las columnas de forma descendente"
+        }
+      }
     };
     this.isFetching = true;
     this.processInitialData();
@@ -41,7 +64,6 @@ export class DevicesComponent implements OnInit {
       if (this.isUserVerified) {
         this.devicesService.fetchDevices(userInfo.email).subscribe(
           devices => {
-            console.log(devices);
             this.isFetching = false;
             this.devices = devices;
             this.dtTrigger.next();
