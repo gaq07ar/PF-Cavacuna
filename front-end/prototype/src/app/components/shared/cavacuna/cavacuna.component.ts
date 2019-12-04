@@ -17,12 +17,14 @@ export class CavacunaComponent implements OnInit {
   acceptedRange: number[] = [];
   minTemp: number;
   maxTemp: number;
+  selectedOption: string = null;
+  vacunaPrueba: string = null;
 
   slots: Slot[] = [
-    new Slot(1, "Hepatitis B", false),
-    new Slot(2, "Neumococo conjugado", false),
-    new Slot(3, "Probando", false),
-    new Slot(4, "Probando aplicada", true)
+    new Slot(1, null, null, false),
+    new Slot(2, null, null, false),
+    new Slot(3, null, null, false),
+    new Slot(4, null, null, true)
   ];
 
   vacunas = [
@@ -101,5 +103,14 @@ export class CavacunaComponent implements OnInit {
         this.actualTemperature = 15;
         this.isFetching = false;
       });
+  }
+
+  setValueToSlot() {
+    console.log(this.selectedOption);
+    console.log(this.vacunaPrueba);
+  }
+
+  trackByIdx(index: number, obj: any): any {
+    return index;
   }
 }
