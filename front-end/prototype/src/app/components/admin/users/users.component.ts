@@ -106,10 +106,12 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(userId: string, deviceId: number) {
+    console.log("chauchau");    
     this.userService
       .removeUserForAdmin(this.adminId, userId, deviceId)
       .subscribe(
         deletedUser => {
+          console.log("chausito");
           alert(
             "Usuario: " +
               userId +
@@ -124,6 +126,13 @@ export class UsersComponent implements OnInit {
           }
         },
         error => {
+          for (var i = 0; i < this.users.length; i++) {
+            if (this.users[i][0] == userId && this.users[i][1] == deviceId) {
+              this.users.splice(i, 1);
+            }
+          }
+          console.log("error");
+          
           alert(
             "Ha ocurrido un error, por favor contactarse a cavacuna.project@gmail.com"
           );
