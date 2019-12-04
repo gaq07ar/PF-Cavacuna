@@ -25,7 +25,27 @@ export class CavacunaComponent implements OnInit {
     new Slot(4, "Probando aplicada", true)
   ];
 
-  vacunas = ["vacu1", "vacu2", "vacu3", "vacu4", "vacu5"];
+  vacunas = [
+    "Polio Oral",
+    "Polio inactivada (IPV)",
+    "BCG",
+    "DTP",
+    "Hepatitis B",
+    "Haemophilus influenzae b",
+    "dTpa",
+    "Td/T",
+    "Hepatitis A",
+    "Triple vírica (sarampión, rubeola, paperas)",
+    "Meningocócica conjugada",
+    "Gripe",
+    "Varicela",
+    "Neumocócica Polisacarida",
+    "Neumocócica Conjugada",
+    "Rabia",
+    "Fiebre amarilla",
+    "Rotavirus",
+    "Papilomavirus (bivalente)"
+  ];
 
   constructor(private http: HttpClient) {}
 
@@ -75,7 +95,10 @@ export class CavacunaComponent implements OnInit {
       )
       .subscribe(lastEntry => {
         console.log(lastEntry);
-        this.actualTemperature = lastEntry;
+        // Only for demo purposes
+        // Production code goes like:
+        // this.actualTemperature = lastEntry;
+        this.actualTemperature = 15;
         this.isFetching = false;
       });
   }

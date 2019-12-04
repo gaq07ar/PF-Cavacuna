@@ -27,6 +27,13 @@ label.custom-control-label {
   padding-right: 1.5rem;
 }
 
+.btn-toolbar {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 label.custom-control-label::before,
 label.custom-control-label::after {
   right: 0;

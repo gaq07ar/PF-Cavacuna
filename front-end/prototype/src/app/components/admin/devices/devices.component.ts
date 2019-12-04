@@ -25,7 +25,6 @@ export class DevicesComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: "full_numbers",
-      pageLength: 2,
       language: {
         emptyTable: "No hay información disponible en la tabla",
         info: "Mostrando _START_ de _END_ de _TOTAL_ entradas",
