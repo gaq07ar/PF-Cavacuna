@@ -63,7 +63,7 @@
               <div class="form-group">
                 <select class="form-control" id="exampleFormControlSelect1">
                   <option [ngValue]="null" [disabled]="true" [hidden]="true">Seleccionar vacuna</option>
-                  <option *ngFor="let vacuna of vacunas; let i = index; trackBy:trackByIdx">{{ vacuna }}</option>
+                  <option *ngFor="let vacuna of vacunas; let i = index; trackBy:trackByIdx">{{ vacuna.id }}</option>
                 </select>
               </div>
             </td>

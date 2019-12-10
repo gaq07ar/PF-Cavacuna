@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { AuthService } from "src/app/services/auth.service";
-import { Device } from "../shared/device.model";
-import { UserService } from "src/app/services/user.service";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Device } from '../shared/device.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: "app-inicio",
-  templateUrl: "./inicio.component.html",
-  styleUrls: ["./inicio.component.css"]
+  selector: 'app-inicio',
+  templateUrl: './inicio.component.html',
+  styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
   username: string;
@@ -19,7 +19,7 @@ export class InicioComponent implements OnInit {
 
   ngOnInit() {
     this.isFetching = true;
-    this.processInitialInformation();
+    this.processInitialInformation().then();
   }
 
   private async processInitialInformation() {
@@ -33,7 +33,7 @@ export class InicioComponent implements OnInit {
     } else {
       this.devices = [];
       this.isFetching = false;
-      document.getElementById("modalVerification").click();
+      document.getElementById('modalVerification').click();
     }
   }
 }

@@ -3,6 +3,8 @@ import { Device } from "../device.model";
 import { Slot } from "../slot.model";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
+import { Vaccine } from "../vaccine.model";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-cavacuna",
@@ -12,6 +14,7 @@ import { map } from "rxjs/operators";
 export class CavacunaComponent implements OnInit {
   @Input() device: Device;
   @Input() i: number;
+  vacunas: Vaccine[] = [];
   actualTemperature: number;
   isFetching = false;
   acceptedRange: number[] = [];
@@ -27,27 +30,27 @@ export class CavacunaComponent implements OnInit {
     new Slot(4, null, null, true)
   ];
 
-  vacunas = [
-    "Polio Oral",
-    "Polio inactivada (IPV)",
-    "BCG",
-    "DTP",
-    "Hepatitis B",
-    "Haemophilus influenzae b",
-    "dTpa",
-    "Td/T",
-    "Hepatitis A",
-    "Triple vírica (sarampión, rubeola, paperas)",
-    "Meningocócica conjugada",
-    "Gripe",
-    "Varicela",
-    "Neumocócica Polisacarida",
-    "Neumocócica Conjugada",
-    "Rabia",
-    "Fiebre amarilla",
-    "Rotavirus",
-    "Papilomavirus (bivalente)"
-  ];
+  // vacunas = [
+  //   'Polio Oral',
+  //   'Polio inactivada (IPV)',
+  //   'BCG',
+  //   'DTP',
+  //   'Hepatitis B',
+  //   'Haemophilus influenzae b',
+  //   'dTpa',
+  //   'Td/T',
+  //   'Hepatitis A',
+  //   'Triple vírica (sarampión, rubeola, paperas)',
+  //   'Meningocócica conjugada',
+  //   'Gripe',
+  //   'Varicela',
+  //   'Neumocócica Polisacarida',
+  //   'Neumocócica Conjugada',
+  //   'Rabia',
+  //   'Fiebre amarilla',
+  //   'Rotavirus',
+  //   'Papilomavirus (bivalente)'
+  // ];
 
   constructor(private http: HttpClient) {}
 
@@ -57,6 +60,7 @@ export class CavacunaComponent implements OnInit {
     this.acceptedRange.push(this.minTemp + 2);
     this.acceptedRange.push(this.maxTemp - 2);
     this.isFetching = true;
+    this.fetchVaccines();
     setInterval(() => this.fetchPosts(), 5000);
   }
 
@@ -101,6 +105,16 @@ export class CavacunaComponent implements OnInit {
         // Production code goes like:
         // this.actualTemperature = lastEntry;
         this.actualTemperature = 15;
+        this.isFetching = false;
+      });
+  }
+
+  private fetchVaccines() {
+    this.http
+      .get("http://" + environment.cavacunaAPIAddress + "/api/vaccine")
+      .subscribe((fetchedVaccines: Vaccine[]) => {
+        console.log(JSON.stringify(fetchedVaccines));
+        this.vacunas = fetchedVaccines;
         this.isFetching = false;
       });
   }
