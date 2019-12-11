@@ -15,6 +15,7 @@ export class CavacunaComponent implements OnInit {
   @Input() device: Device;
   @Input() i: number;
   vacunas: Vaccine[] = [];
+  selectedVaccine: Vaccine = null;
   actualTemperature: number;
   isFetching = false;
   acceptedRange: number[] = [];
@@ -22,34 +23,15 @@ export class CavacunaComponent implements OnInit {
   maxTemp: number;
   selectedOption: string = null;
   vacunaPrueba: string = null;
+  selectedValue: string = null;
 
-  slots: Slot[] = [
-    new Slot(1, null, null, false),
-    new Slot(2, null, null, false),
-    new Slot(3, null, null, false),
-    new Slot(4, null, null, true)
-  ];
-
-  // vacunas = [
-  //   'Polio Oral',
-  //   'Polio inactivada (IPV)',
-  //   'BCG',
-  //   'DTP',
-  //   'Hepatitis B',
-  //   'Haemophilus influenzae b',
-  //   'dTpa',
-  //   'Td/T',
-  //   'Hepatitis A',
-  //   'Triple vírica (sarampión, rubeola, paperas)',
-  //   'Meningocócica conjugada',
-  //   'Gripe',
-  //   'Varicela',
-  //   'Neumocócica Polisacarida',
-  //   'Neumocócica Conjugada',
-  //   'Rabia',
-  //   'Fiebre amarilla',
-  //   'Rotavirus',
-  //   'Papilomavirus (bivalente)'
+  slots: Slot[] = [];
+  // slots = new Map<number, Slot>();
+  // slots: Slot[] = [
+  //   new Slot(1, null, null, false),
+  //   new Slot(2, null, null, false),
+  //   new Slot(3, null, null, false),
+  //   new Slot(4, null, null, true)
   // ];
 
   constructor(private http: HttpClient) {}
@@ -61,7 +43,26 @@ export class CavacunaComponent implements OnInit {
     this.acceptedRange.push(this.maxTemp - 2);
     this.isFetching = true;
     this.fetchVaccines();
+    this.fetchSlots();
+    // for (let i = 0; i < this.device.slots_amount; i++) {
+    //   this.slots.set(i + 1, new Slot(i + 1, null, null, false, false));
+    // }
     setInterval(() => this.fetchPosts(), 5000);
+  }
+
+  fetchSlots() {
+    this.http
+      .get(
+        "http://" +
+          environment.cavacunaAPIAddress +
+          "/api/device/getStorageRelatedInformation/" +
+          this.device.id
+      )
+      .subscribe((fetchedSlots: Slot[]) => {
+        this.slots = fetchedSlots;
+        this.isFetching = false;
+      });
+    // localhost:3000/api/device/getStorageRelatedInformation/12345
   }
 
   checkWarningValidation(incomingTemperature: number): boolean {
@@ -100,7 +101,6 @@ export class CavacunaComponent implements OnInit {
         )
       )
       .subscribe(lastEntry => {
-        console.log(lastEntry);
         // Only for demo purposes
         // Production code goes like:
         // this.actualTemperature = lastEntry;
@@ -113,18 +113,59 @@ export class CavacunaComponent implements OnInit {
     this.http
       .get("http://" + environment.cavacunaAPIAddress + "/api/vaccine")
       .subscribe((fetchedVaccines: Vaccine[]) => {
-        console.log(JSON.stringify(fetchedVaccines));
         this.vacunas = fetchedVaccines;
         this.isFetching = false;
       });
   }
 
-  setValueToSlot() {
-    console.log(this.selectedOption);
-    console.log(this.vacunaPrueba);
+  public onChange(event): void {
+    const newVal = event.target.value;
+    console.log(newVal);
   }
 
-  trackByIdx(index: number, obj: any): any {
-    return index;
+  showSelectedVaccine(i: number) {
+    console.log(this.slots[i]);
+  }
+
+  addRegistryAndClean(i: number) {
+    const slotToAdd: Slot = this.slots[i];
+    this.http
+      .post(
+        "http://" +
+          environment.cavacunaAPIAddress +
+          "/api/storage/addSlotRegistry",
+        {
+          slot: slotToAdd.slot,
+          deviceId: this.device.id,
+          userVaccineId: slotToAdd.user_vaccine_id,
+          vaccineId: slotToAdd.vaccine_id
+        }
+      )
+      .subscribe(slotAdded => {
+        this.slots[i].user_vaccine_id = null;
+        this.slots[i].vaccine_id = "";
+      });
+  }
+
+  deleteValuesInSlot(i: number) {
+    this.slots[i].user_vaccine_id = null;
+    this.slots[i].vaccine_id = "";
+  }
+
+  saveRegistry(i: number) {
+    const slotToModify: Slot = this.slots[i];
+    this.http
+      .put(
+        "http://" + environment.cavacunaAPIAddress + "/api/storage/saveSlot",
+        {
+          slot: slotToModify.slot,
+          deviceId: this.device.id,
+          userVaccineId: slotToModify.user_vaccine_id,
+          vaccineId: slotToModify.vaccine_id
+        }
+      )
+      .subscribe(slotAdded => {
+        console.log(slotAdded);
+      });
   }
 }
