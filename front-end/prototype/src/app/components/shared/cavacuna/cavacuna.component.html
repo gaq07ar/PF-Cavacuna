@@ -50,7 +50,7 @@
         </thead>
         <tbody>
           <!-- <tr *ngFor="let slot of slots | keyvalue; let i = index" class="" [ngClass]="{ -->
-          <tr *ngFor="let slot of slots; let i = index" class="" [ngClass]="{
+          <tr *ngFor="let slot of slots; let idx = index" class="" [ngClass]="{
               'text-white':
                 checkColdDangerValidation(actualTemperature) ||
                 checkWarningValidation(actualTemperature) ||
@@ -89,22 +89,26 @@
             <td>
               <div class="btn-toolbar button-group" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                  <button type="button" class="btn btn-primary" title='Aplicar' (click)="addRegistryAndClean(i)">
+                  <button type="button" class="btn btn-primary" title='Aplicar' (click)="addRegistryAndClean(idx)">
                     <i class="fas fa-check-square"></i>
                   </button>
                 </div>
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                  <button type="button" class="btn btn-success" title='Guardar estado actual' (click)="saveRegistry(i)">
+                  <button type="button" class="btn btn-success" title='Guardar estado actual'
+                    (click)="saveRegistry(idx)">
                     <i class="far fa-save "></i>
                   </button>
                 </div>
                 <div class="btn-group" role="group" aria-label="Third group">
-                  <button type="button" class="btn btn-danger" title='Eliminar' (click)="deleteValuesInSlot(i)">
+                  <button type="button" class="btn btn-danger" title='Eliminar' (click)="deleteValuesInSlot(idx)">
                     <i class="far fa-trash-alt "></i>
                   </button>
                 </div>
               </div>
             </td>
+
+
+
           </tr>
         </tbody>
       </table>
@@ -129,16 +133,61 @@
   <div id="collapseX{{ i }}" class="collapse" attr.aria-labelledby="headingX{{ i }}" data-parent="#accordionExample">
     <div class="card-body">
       <div class="container">
-        <div class="custom-control custom-checkbox mb-3">
+        <!-- <div class="custom-control custom-checkbox mb-3">
           <input type="checkbox" class="custom-control-input" id="customCheck" name="fotosensible" />
           <label class="custom-control-label" for="customCheck">Fotosensible</label>
-        </div>
+        </div> -->
         <div class="form-group">
           <label for="comment">Descripción:</label>
           <textarea class="form-control" rows="3" id="comment"></textarea>
         </div>
         <div class="float-right pb-2">
           <button class="btn btn-info" type="submit">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="modalIdSlot" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1"
+    [hidden]="true">
+    Launch modal
+  </button>
+  <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          El id para el slot no puede estar vacío.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="modalVaccineId" type="button" class="btn btn-primary" data-toggle="modal"
+    data-target="#exampleModalCenter2" [hidden]="true">
+    Launch modal
+  </button>
+  <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          Por favor seleccione una vacuna de la lista.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="modalIdSlotVaccineId" type="button" class="btn btn-primary" data-toggle="modal"
+    data-target="#exampleModalCenter3" [hidden]="true">
+    Launch modal
+  </button>
+  <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          El id para el slot no puede estar vacío. Por favor seleccione una vacuna de la lista.
         </div>
       </div>
     </div>

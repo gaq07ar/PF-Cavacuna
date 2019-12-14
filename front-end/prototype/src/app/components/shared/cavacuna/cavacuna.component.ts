@@ -129,22 +129,29 @@ export class CavacunaComponent implements OnInit {
 
   addRegistryAndClean(i: number) {
     const slotToAdd: Slot = this.slots[i];
-    this.http
-      .post(
-        "http://" +
-          environment.cavacunaAPIAddress +
-          "/api/storage/addSlotRegistry",
-        {
-          slot: slotToAdd.slot,
-          deviceId: this.device.id,
-          userVaccineId: slotToAdd.user_vaccine_id,
-          vaccineId: slotToAdd.vaccine_id
-        }
-      )
-      .subscribe(slotAdded => {
-        this.slots[i].user_vaccine_id = null;
-        this.slots[i].vaccine_id = "";
-      });
+    if (!slotToAdd.user_vaccine_id && !slotToAdd.vaccine_id) {
+      document.getElementById("modalIdSlotVaccineId").click();
+    } else if (!slotToAdd.user_vaccine_id) {
+      document.getElementById("modalIdSlot").click();
+    } else if (!slotToAdd.vaccine_id) {
+      document.getElementById("modalVaccineId").click();
+    } else
+      this.http
+        .post(
+          "http://" +
+            environment.cavacunaAPIAddress +
+            "/api/storage/addSlotRegistry",
+          {
+            slot: slotToAdd.slot,
+            deviceId: this.device.id,
+            userVaccineId: slotToAdd.user_vaccine_id,
+            vaccineId: slotToAdd.vaccine_id
+          }
+        )
+        .subscribe(slotAdded => {
+          this.slots[i].user_vaccine_id = null;
+          this.slots[i].vaccine_id = "";
+        });
   }
 
   deleteValuesInSlot(i: number) {
@@ -154,18 +161,26 @@ export class CavacunaComponent implements OnInit {
 
   saveRegistry(i: number) {
     const slotToModify: Slot = this.slots[i];
-    this.http
-      .put(
-        "http://" + environment.cavacunaAPIAddress + "/api/storage/saveSlot",
-        {
-          slot: slotToModify.slot,
-          deviceId: this.device.id,
-          userVaccineId: slotToModify.user_vaccine_id,
-          vaccineId: slotToModify.vaccine_id
-        }
-      )
-      .subscribe(slotAdded => {
-        console.log(slotAdded);
-      });
+    if (!slotToModify.user_vaccine_id && !slotToModify.vaccine_id) {
+      document.getElementById("modalIdSlotVaccineId").click();
+    } else if (!slotToModify.user_vaccine_id) {
+      document.getElementById("modalIdSlot").click();
+    } else if (!slotToModify.vaccine_id) {
+      document.getElementById("modalVaccineId").click();
+    } else {
+      this.http
+        .put(
+          "http://" + environment.cavacunaAPIAddress + "/api/storage/saveSlot",
+          {
+            slot: slotToModify.slot,
+            deviceId: this.device.id,
+            userVaccineId: slotToModify.user_vaccine_id,
+            vaccineId: slotToModify.vaccine_id
+          }
+        )
+        .subscribe(slotAdded => {
+          console.log(slotAdded);
+        });
+    }
   }
 }
