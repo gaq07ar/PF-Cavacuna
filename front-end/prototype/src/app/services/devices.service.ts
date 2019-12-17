@@ -13,7 +13,7 @@ export class DevicesService {
   fetchDevices(username: string) {
     return this.http
       .get<Device[]>(
-        "http://" +
+        "https://" +
           environment.cavacunaAPIAddress +
           "/api/device/getDevicesForUser/" +
           username

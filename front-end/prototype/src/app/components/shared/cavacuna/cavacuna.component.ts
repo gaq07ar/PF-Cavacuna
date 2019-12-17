@@ -53,7 +53,7 @@ export class CavacunaComponent implements OnInit {
   fetchSlots() {
     this.http
       .get(
-        "http://" +
+        "https://" +
           environment.cavacunaAPIAddress +
           "/api/device/getStorageRelatedInformation/" +
           this.device.id
@@ -111,7 +111,7 @@ export class CavacunaComponent implements OnInit {
 
   private fetchVaccines() {
     this.http
-      .get("http://" + environment.cavacunaAPIAddress + "/api/vaccine")
+      .get("https://" + environment.cavacunaAPIAddress + "/api/vaccine")
       .subscribe((fetchedVaccines: Vaccine[]) => {
         this.vacunas = fetchedVaccines;
         this.isFetching = false;
@@ -138,7 +138,7 @@ export class CavacunaComponent implements OnInit {
     } else
       this.http
         .post(
-          "http://" +
+          "https://" +
             environment.cavacunaAPIAddress +
             "/api/storage/addSlotRegistry",
           {
@@ -170,7 +170,7 @@ export class CavacunaComponent implements OnInit {
     } else {
       this.http
         .put(
-          "http://" + environment.cavacunaAPIAddress + "/api/storage/saveSlot",
+          "https://" + environment.cavacunaAPIAddress + "/api/storage/saveSlot",
           {
             slot: slotToModify.slot,
             deviceId: this.device.id,

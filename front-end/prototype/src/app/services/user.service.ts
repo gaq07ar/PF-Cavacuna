@@ -21,7 +21,7 @@ export class UserService {
   isAdmin(username: string) {
     return this.http
       .get<User>(
-        "http://" + environment.cavacunaAPIAddress + "/api/user/" + username
+        "https://" + environment.cavacunaAPIAddress + "/api/user/" + username
       )
       .pipe(
         map(userData => {
@@ -32,7 +32,7 @@ export class UserService {
 
   fetchRegisteredUsersForAdmin(adminId: string) {
     return this.http.get<[[string, number]]>(
-      "http://" +
+      "https://" +
         environment.cavacunaAPIAddress +
         "/api/user/getRegisteredUsersForAdmin/" +
         adminId
@@ -41,7 +41,7 @@ export class UserService {
 
   addUserToAdmin(adminId: string, userId: string, deviceId) {
     return this.http.post(
-      "http://" + environment.cavacunaAPIAddress + "/api/user/addUserToAdmin",
+      "https://" + environment.cavacunaAPIAddress + "/api/user/addUserToAdmin",
       {
         adminId: adminId,
         userId: userId,
@@ -63,7 +63,7 @@ export class UserService {
     };
 
     return this.http.delete(
-      "http://" +
+      "https://" +
         environment.cavacunaAPIAddress +
         "/api/user/deleteRegisteredUserForAdmin",
       options

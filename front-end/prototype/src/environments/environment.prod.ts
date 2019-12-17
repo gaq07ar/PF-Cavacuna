@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  cavacunaAPIAddress: "www.cavacuna-api.site"
 };
